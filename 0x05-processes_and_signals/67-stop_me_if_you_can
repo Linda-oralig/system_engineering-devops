@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Stops only the 7-highlander processes silently (sends SIGTERM)
+
+for PID in $(pgrep -f 7-highlander); do
+    if [ "$PID" != "$$" ]; then
+        pkill -TERM -P "$PID"
+    fi
+done

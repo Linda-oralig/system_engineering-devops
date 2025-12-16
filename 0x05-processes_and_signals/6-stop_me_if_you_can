@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # This script stops the running 4-to_infinity_and_beyond process without using kill or killall
+# Ensures only the correct processes are terminated
 
-PID=$(pgrep -f 4-to_infinity_and_beyond)
-[ -n "$PID" ] && pkill -TERM -P "$PID"
+for PID in $(pgrep -f 4-to_infinity_and_beyond); do
+    [ "$PID" != $$ ] && [ -n "$PID" ] && pkill -TERM -P "$PID"
+done
